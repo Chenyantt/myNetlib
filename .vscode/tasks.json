@@ -1,0 +1,38 @@
+// tasks.json
+{
+    // https://code.visualstudio.com/docs/editor/tasks
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "CMAKE",   // 任务的名字叫CMAKE，注意是大小写区分的，等会在launch中调用这个名字
+            "type": "shell",    // 任务执行的是shell命令
+            "command": "cmake", // 配置cmake环境变量，否则使用绝对路径
+            "args": [
+                "-S./",//cmake文件位于相对与WorkSpace的路径
+                "-Bbuild",//生成的文件位于相对与WorkSpace的路径
+                "-L",
+                "-DBUILD_DEBUG:BOOL=ON"//配置-g选项是否开启的变量，可自主命名
+            ]
+        },
+        {
+            "label": "MAKE",    // 任务的名字叫MAKE，注意是大小写区分的，等会在launch中调用这个名字
+            "type": "shell",    // 任务执行的是shell命令
+            "command": "make",  // 配置make环境变量，否则使用绝对路径
+            "args": [
+                "-C","build"
+            ]
+        },
+        {
+            "label": "BuildProject",   // 任务的名字叫Build，注意是大小写区分的，等会在launch中调用这个名字
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "dependsOrder": "sequence",//顺序执行依赖
+            "dependsOn": [
+                "CMAKE",
+                "MAKE"
+            ]
+        }
+    ]
+}

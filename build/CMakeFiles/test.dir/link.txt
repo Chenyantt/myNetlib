@@ -1,0 +1,1 @@
+/usr/bin/cc -g CMakeFiles/test.dir/src/device.c.o CMakeFiles/test.dir/src/test.c.o -o ../bin/test  -lpcap 
